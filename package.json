@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "product-boilerplate",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "node --test"
+  }
+}
