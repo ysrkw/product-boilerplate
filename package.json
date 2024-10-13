@@ -6,6 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "lint": "prettier . --write"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
   }
 }
