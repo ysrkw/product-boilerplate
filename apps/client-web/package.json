@@ -1,0 +1,6 @@
+{
+  "name": "@apps/client-web",
+  "scripts": {
+    "dev": "node --test"
+  }
+}

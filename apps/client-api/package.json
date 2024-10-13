@@ -1,0 +1,6 @@
+{
+  "name": "@apps/client-api",
+  "scripts": {
+    "dev": "node --test"
+  }
+}

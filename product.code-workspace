@@ -1,0 +1,13 @@
+{
+  "folders": [
+    { "path": ".", "name": "@product" },
+    { "path": "./apps/client-api", "name": "@apps/client-api" },
+    { "path": "./apps/client-web", "name": "@apps/client-web" },
+  ],
+  "settings": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": {
+      "**/apps": true,
+    },
+  },
+}
