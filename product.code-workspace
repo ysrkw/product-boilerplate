@@ -1,13 +1,14 @@
 {
   "folders": [
-    { "path": ".", "name": "@product" },
-    { "path": "./apps/client-api", "name": "@apps/client-api" },
-    { "path": "./apps/client-web", "name": "@apps/client-web" },
+    { "name": "product", "path": "." },
+    { "name": "apps/client-api", "path": "./apps/client-api" },
+    { "name": "apps/client-web", "path": "./apps/client-web" },
   ],
   "settings": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.exclude": {
       "**/apps": true,
     },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.workingDirectories": [{ "mode": "auto" }],
   },
 }
