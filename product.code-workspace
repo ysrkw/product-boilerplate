@@ -9,6 +9,9 @@
       "**/apps": true,
     },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+    },
     "eslint.workingDirectories": [{ "mode": "auto" }],
   },
 }
