@@ -14,6 +14,6 @@ export default tseslint.config(
   sonarjs.configs.recommended,
   prettier,
   {
-    ignores: ['dist'],
+    ignores: ['.turbo', 'dist'],
   },
 )
