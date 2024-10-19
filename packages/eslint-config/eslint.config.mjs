@@ -1,4 +1,4 @@
-import repo from '@repo/eslint-config'
+import repo from './src/index.mjs'
 
 export default [
   ...repo.configs.node,

@@ -5,8 +5,12 @@
       "cache": false,
       "persistent": true
     },
-    "build": {},
-    "lint": {},
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "lint": {
+      "cache": false
+    },
     "tsc": {}
   }
 }
