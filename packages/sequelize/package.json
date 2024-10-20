@@ -3,14 +3,18 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint . --fix",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
-    "sqlite3": "^5.1.7",
-    "sequelize": "^6.0.0"
+    "sequelize": "^6.37.4",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@repo/eslint-config": "*",
     "@tsconfig/node22": "^22.0.0",
+    "eslint": "^9.0.0",
     "typescript": "~5.5.0"
   }
 }

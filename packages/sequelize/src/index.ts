@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize'
-import { initUser, User } from './user'
+
+import { initUser } from './user'
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -8,4 +9,6 @@ const sequelize = new Sequelize({
 
 initUser(sequelize)
 
-export { sequelize, User }
+export { sequelize }
+
+export { User } from './user'

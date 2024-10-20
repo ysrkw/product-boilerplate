@@ -11,6 +11,8 @@
     "lint": {
       "cache": false
     },
-    "tsc": {}
+    "tsc": {
+      "cache": false
+    }
   }
 }
