@@ -4,6 +4,7 @@
     { "name": "client-api", "path": "./apps/client-api" },
     { "name": "client-web", "path": "./apps/client-web" },
     { "name": "@repo/eslint-config", "path": "./packages/eslint-config" },
+    { "name": "@repo/sequelize", "path": "./packages/sequelize" },
   ],
   "settings": {
     "files.exclude": {
