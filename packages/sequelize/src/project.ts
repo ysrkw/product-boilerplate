@@ -7,24 +7,17 @@ import {
   Sequelize,
 } from 'sequelize'
 
-export class User extends Model<
-  InferAttributes<User>,
-  InferCreationAttributes<User>
+export class Project extends Model<
+  InferAttributes<Project>,
+  InferCreationAttributes<Project>
 > {
-  declare email: string
   declare id: CreationOptional<number>
   declare name: string
-  declare password: string
 }
 
-export function initUser(sequelize: Sequelize) {
-  User.init(
+export function initProject(sequelize: Sequelize) {
+  Project.init(
     {
-      email: {
-        allowNull: false,
-        type: DataTypes.STRING(),
-        unique: true,
-      },
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -32,10 +25,6 @@ export function initUser(sequelize: Sequelize) {
         type: DataTypes.INTEGER(),
       },
       name: {
-        allowNull: false,
-        type: DataTypes.STRING(),
-      },
-      password: {
         allowNull: false,
         type: DataTypes.STRING(),
       },
