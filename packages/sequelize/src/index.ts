@@ -16,7 +16,7 @@ export function initialize(sequelize: Sequelize): void {
   Member.relationship()
   PasswordRequest.relationship()
   Project.relationship()
-  Session.initialize(sequelize)
+  Session.relationship()
   User.relationship()
 }
 
