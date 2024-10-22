@@ -9,7 +9,9 @@ import {
 } from 'sequelize'
 
 import { Member } from './member'
+import { PasswordRequest } from './password-request'
 import { Project } from './project'
+import { Session } from './session'
 
 export class User extends Model<
   InferAttributes<User>,
@@ -20,7 +22,10 @@ export class User extends Model<
   declare members: NonAttribute<Member[]>
   declare name: string
   declare password: string
+  declare passwordRequests: NonAttribute<PasswordRequest[]>
+  declare permalink: string
   declare projects: NonAttribute<Project[]>
+  declare sessions: NonAttribute<Session[]>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
@@ -44,6 +49,11 @@ export class User extends Model<
           allowNull: false,
           type: DataTypes.STRING(),
         },
+        permalink: {
+          allowNull: false,
+          type: DataTypes.STRING(),
+          unique: true,
+        },
       },
       {
         sequelize,
@@ -54,8 +64,8 @@ export class User extends Model<
 
   static relationship(): void {
     this.hasMany(Member)
-    this.belongsToMany(Project, {
-      through: Member,
-    })
+    this.hasMany(PasswordRequest)
+    this.belongsToMany(Project, { through: Member })
+    this.hasMany(Session)
   }
 }

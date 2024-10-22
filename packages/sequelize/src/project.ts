@@ -18,6 +18,7 @@ export class Project extends Model<
   declare id: CreationOptional<number>
   declare members: NonAttribute<Member[]>
   declare name: string
+  declare permalink: string
   declare users: NonAttribute<User[]>
 
   static initialize(sequelize: Sequelize): void {
@@ -33,6 +34,11 @@ export class Project extends Model<
           allowNull: false,
           type: DataTypes.STRING(),
         },
+        permalink: {
+          allowNull: false,
+          type: DataTypes.STRING(),
+          unique: true,
+        },
       },
       {
         sequelize,
@@ -43,8 +49,6 @@ export class Project extends Model<
 
   static relationship(): void {
     this.hasMany(Member)
-    this.belongsToMany(User, {
-      through: Member,
-    })
+    this.belongsToMany(User, { through: Member })
   }
 }

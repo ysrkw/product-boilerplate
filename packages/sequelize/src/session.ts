@@ -8,25 +8,34 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Project } from './project'
 import { User } from './user'
 
-export class Member extends Model<
-  InferAttributes<Member>,
-  InferCreationAttributes<Member>
+export class Session extends Model<
+  InferAttributes<Session>,
+  InferCreationAttributes<Session>
 > {
-  declare project: NonAttribute<Project>
-  declare projectId: ForeignKey<Project['id']>
+  declare expiredAt: Date
+  declare id: number
+  declare permalink: string
   declare user: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
       {
-        projectId: {
+        expiredAt: {
+          allowNull: false,
+          type: DataTypes.DATE(),
+        },
+        id: {
           allowNull: false,
           primaryKey: true,
           type: DataTypes.INTEGER(),
+        },
+        permalink: {
+          allowNull: false,
+          type: DataTypes.STRING(),
+          unique: true,
         },
         userId: {
           allowNull: false,
@@ -35,6 +44,7 @@ export class Member extends Model<
         },
       },
       {
+        indexes: [{ fields: ['user_id'], unique: false }],
         sequelize,
         underscored: true,
       },
@@ -42,7 +52,6 @@ export class Member extends Model<
   }
 
   static relationship(): void {
-    this.belongsTo(Project, { onDelete: 'CASCADE' })
     this.belongsTo(User, { onDelete: 'CASCADE' })
   }
 }
