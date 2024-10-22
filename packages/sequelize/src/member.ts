@@ -1,4 +1,5 @@
 import {
+  Association,
   DataTypes,
   ForeignKey,
   InferAttributes,
@@ -15,9 +16,14 @@ export class Member extends Model<
   InferAttributes<Member>,
   InferCreationAttributes<Member>
 > {
-  declare project: NonAttribute<Project>
+  declare static associations: {
+    project: Association<Member, Project>
+    user: Association<Member, User>
+  }
+
+  declare project?: NonAttribute<Project>
   declare projectId: ForeignKey<Project['id']>
-  declare user: NonAttribute<User>
+  declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {

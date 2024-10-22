@@ -1,4 +1,5 @@
 import {
+  Association,
   DataTypes,
   ForeignKey,
   InferAttributes,
@@ -14,9 +15,13 @@ export class PasswordRequest extends Model<
   InferAttributes<PasswordRequest>,
   InferCreationAttributes<PasswordRequest>
 > {
+  declare static associations: {
+    user: Association<PasswordRequest, User>
+  }
+
   declare id: string
   declare permalink: string
-  declare user: NonAttribute<User>
+  declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {

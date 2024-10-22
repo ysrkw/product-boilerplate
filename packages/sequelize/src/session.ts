@@ -1,4 +1,5 @@
 import {
+  Association,
   CreationOptional,
   DataTypes,
   ForeignKey,
@@ -15,11 +16,15 @@ export class Session extends Model<
   InferAttributes<Session>,
   InferCreationAttributes<Session>
 > {
+  declare static associations: {
+    user: Association<Session, User>
+  }
+
   declare expiredAt: Date
   declare id: CreationOptional<number>
   declare ipAddress: string
   declare permalink: string
-  declare user: NonAttribute<User>
+  declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {

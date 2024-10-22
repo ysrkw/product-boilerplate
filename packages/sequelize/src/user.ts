@@ -1,4 +1,5 @@
 import {
+  Association,
   CreationOptional,
   DataTypes,
   InferAttributes,
@@ -17,15 +18,22 @@ export class User extends Model<
   InferAttributes<User>,
   InferCreationAttributes<User>
 > {
+  declare static associations: {
+    members: Association<User, Member>
+    passwordRequests: Association<User, PasswordRequest>
+    projects: Association<User, Project>
+    sessions: Association<User, Session>
+  }
+
   declare email: string
   declare id: CreationOptional<number>
-  declare members: NonAttribute<Member[]>
+  declare members?: NonAttribute<Member[]>
   declare name: string
   declare password: string
-  declare passwordRequests: NonAttribute<PasswordRequest[]>
+  declare passwordRequests?: NonAttribute<PasswordRequest[]>
   declare permalink: string
-  declare projects: NonAttribute<Project[]>
-  declare sessions: NonAttribute<Session[]>
+  declare projects?: NonAttribute<Project[]>
+  declare sessions?: NonAttribute<Session[]>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
