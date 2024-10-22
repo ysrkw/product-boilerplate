@@ -9,7 +9,9 @@
   "dependencies": {
     "@hono/node-server": "^1.13.2",
     "@repo/sequelize": "*",
-    "hono": "^4.6.4"
+    "hono": "^4.6.4",
+    "sequelize": "^6.37.4",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

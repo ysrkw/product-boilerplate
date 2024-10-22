@@ -4,6 +4,7 @@ import {
   InferAttributes,
   InferCreationAttributes,
   Model,
+  NonAttribute,
   Sequelize,
 } from 'sequelize'
 
@@ -14,26 +15,34 @@ export class ProjectRole extends Model<
   InferAttributes<ProjectRole>,
   InferCreationAttributes<ProjectRole>
 > {
+  declare project: NonAttribute<Project>
   declare projectId: ForeignKey<Project['id']>
+  declare user: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
-}
 
-export function initProjectRole(sequelize: Sequelize) {
-  ProjectRole.init(
-    {
-      projectId: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.INTEGER(),
+  static initialize(sequelize: Sequelize): void {
+    this.init(
+      {
+        projectId: {
+          allowNull: false,
+          primaryKey: true,
+          type: DataTypes.INTEGER(),
+        },
+        userId: {
+          allowNull: false,
+          primaryKey: true,
+          type: DataTypes.INTEGER(),
+        },
       },
-      userId: {
-        allowNull: false,
-        primaryKey: true,
-        type: DataTypes.INTEGER(),
+      {
+        sequelize,
+        underscored: true,
       },
-    },
-    {
-      sequelize,
-    },
-  )
+    )
+  }
+
+  static relationship(): void {
+    this.belongsTo(Project)
+    this.belongsTo(User)
+  }
 }
