@@ -1,15 +1,15 @@
 import { Sequelize } from 'sequelize'
 
+import { Member } from './member'
 import { Project } from './project'
-import { ProjectRole } from './project-role'
 import { User } from './user'
 
 export function initialize(sequelize: Sequelize): void {
+  Member.initialize(sequelize)
   Project.initialize(sequelize)
-  ProjectRole.initialize(sequelize)
   User.initialize(sequelize)
 }
 
+export { Member } from './member'
 export { Project } from './project'
-export { ProjectRole } from './project-role'
 export { User } from './user'

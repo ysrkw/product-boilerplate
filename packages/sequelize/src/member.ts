@@ -11,9 +11,9 @@ import {
 import { Project } from './project'
 import { User } from './user'
 
-export class ProjectRole extends Model<
-  InferAttributes<ProjectRole>,
-  InferCreationAttributes<ProjectRole>
+export class Member extends Model<
+  InferAttributes<Member>,
+  InferCreationAttributes<Member>
 > {
   declare project: NonAttribute<Project>
   declare projectId: ForeignKey<Project['id']>

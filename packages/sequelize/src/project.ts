@@ -4,10 +4,11 @@ import {
   InferAttributes,
   InferCreationAttributes,
   Model,
+  NonAttribute,
   Sequelize,
 } from 'sequelize'
 
-import { ProjectRole } from './project-role'
+import { Member } from './member'
 import { User } from './user'
 
 export class Project extends Model<
@@ -15,7 +16,9 @@ export class Project extends Model<
   InferCreationAttributes<Project>
 > {
   declare id: CreationOptional<number>
+  declare members: NonAttribute<Member[]>
   declare name: string
+  declare users: NonAttribute<User[]>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
@@ -39,9 +42,9 @@ export class Project extends Model<
   }
 
   static relationship(): void {
-    this.hasMany(ProjectRole)
+    this.hasMany(Member)
     this.belongsToMany(User, {
-      through: ProjectRole,
+      through: Member,
     })
   }
 }
