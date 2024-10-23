@@ -1,8 +1,8 @@
 import { User } from '@repo/sequelize'
 import { Hono } from 'hono'
 
-export const users = new Hono().get('/', async (context) => {
+export const users = new Hono().get('/', async (c) => {
   const users = await User.findAll()
 
-  return context.json(users)
+  return c.json(users)
 })

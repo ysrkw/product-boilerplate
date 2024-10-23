@@ -21,5 +21,7 @@ export function initialize(sequelize: Sequelize): void {
 }
 
 export { Member } from './member'
+export { PasswordRequest } from './password-request'
 export { Project } from './project'
+export { Session } from './session'
 export { User } from './user'

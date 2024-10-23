@@ -9,6 +9,7 @@
   "dependencies": {
     "@hono/node-server": "^1.13.2",
     "@repo/sequelize": "*",
+    "argon2": "^0.41.1",
     "hono": "^4.6.4",
     "sequelize": "^6.37.4",
     "sqlite3": "^5.1.7"
