@@ -19,7 +19,7 @@ export const sessions = new Hono()
     return c.json({ session: { id: session.permalink } })
   })
   .post('/', async (c) => {
-    const body = await c.req.parseBody<{
+    const body = await c.req.json<{
       email: string
       password: string
     }>()
