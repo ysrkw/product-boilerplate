@@ -1,7 +1,7 @@
 {
   "name": "client-web",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --clearScreen false",
     "build": "vite build",
     "lint": "eslint . --fix",
     "tsc": "tsc --noEmit"

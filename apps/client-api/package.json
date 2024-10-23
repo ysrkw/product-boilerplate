@@ -1,7 +1,7 @@
 {
   "name": "client-api",
   "scripts": {
-    "dev": "node -r ts-node/register --watch src/main.ts",
+    "dev": "nodemon src/main.ts",
     "build": "tsc",
     "lint": "eslint . --fix",
     "tsc": "tsc --noEmit"
@@ -17,6 +17,7 @@
     "@repo/eslint-config": "*",
     "@tsconfig/node22": "^22.0.0",
     "eslint": "^9.0.0",
+    "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "~5.5.0"
   }
