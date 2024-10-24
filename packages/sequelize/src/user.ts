@@ -1,6 +1,5 @@
 import {
   Association,
-  CreationOptional,
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
@@ -9,9 +8,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Member } from './member'
 import { PasswordRequest } from './password-request'
-import { Project } from './project'
 import { Session } from './session'
 
 export class User extends Model<
@@ -19,20 +16,14 @@ export class User extends Model<
   InferCreationAttributes<User>
 > {
   declare static associations: {
-    members: Association<User, Member>
     passwordRequests: Association<User, PasswordRequest>
-    projects: Association<User, Project>
     sessions: Association<User, Session>
   }
 
   declare email: string
-  declare id: CreationOptional<number>
-  declare members?: NonAttribute<Member[]>
-  declare name: string
-  declare password: string
+  declare id: string
+  declare passwordHash: string
   declare passwordRequests?: NonAttribute<PasswordRequest[]>
-  declare permalink: string
-  declare projects?: NonAttribute<Project[]>
   declare sessions?: NonAttribute<Session[]>
 
   static initialize(sequelize: Sequelize): void {
@@ -45,22 +36,12 @@ export class User extends Model<
         },
         id: {
           allowNull: false,
-          autoIncrement: true,
           primaryKey: true,
-          type: DataTypes.INTEGER(),
-        },
-        name: {
-          allowNull: false,
           type: DataTypes.STRING(),
         },
-        password: {
+        passwordHash: {
           allowNull: false,
           type: DataTypes.STRING(),
-        },
-        permalink: {
-          allowNull: false,
-          type: DataTypes.STRING(),
-          unique: true,
         },
       },
       {
@@ -71,9 +52,7 @@ export class User extends Model<
   }
 
   static relationship(): void {
-    this.hasMany(Member)
     this.hasMany(PasswordRequest)
-    this.belongsToMany(Project, { through: Member })
     this.hasMany(Session)
   }
 }

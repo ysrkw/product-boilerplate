@@ -19,27 +19,26 @@ export class PasswordRequest extends Model<
     user: Association<PasswordRequest, User>
   }
 
+  declare expiredAt: Date
   declare id: string
-  declare permalink: string
   declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
       {
+        expiredAt: {
+          allowNull: false,
+          type: DataTypes.DATE(),
+        },
         id: {
           allowNull: false,
           primaryKey: true,
           type: DataTypes.STRING(),
         },
-        permalink: {
-          allowNull: false,
-          type: DataTypes.STRING(),
-          unique: true,
-        },
         userId: {
           allowNull: false,
-          type: DataTypes.INTEGER(),
+          type: DataTypes.STRING(),
         },
       },
       {

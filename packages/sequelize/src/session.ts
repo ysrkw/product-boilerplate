@@ -1,6 +1,5 @@
 import {
   Association,
-  CreationOptional,
   DataTypes,
   ForeignKey,
   InferAttributes,
@@ -21,9 +20,8 @@ export class Session extends Model<
   }
 
   declare expiredAt: Date
-  declare id: CreationOptional<number>
+  declare id: string
   declare ipAddress: string
-  declare permalink: string
   declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
@@ -36,23 +34,16 @@ export class Session extends Model<
         },
         id: {
           allowNull: false,
-          autoIncrement: true,
           primaryKey: true,
-          type: DataTypes.INTEGER(),
+          type: DataTypes.STRING(),
         },
         ipAddress: {
           allowNull: false,
           type: DataTypes.STRING(),
         },
-        permalink: {
-          allowNull: false,
-          type: DataTypes.STRING(),
-          unique: true,
-        },
         userId: {
           allowNull: false,
-          primaryKey: true,
-          type: DataTypes.INTEGER(),
+          type: DataTypes.STRING(),
         },
       },
       {
