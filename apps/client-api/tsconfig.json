@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/node22",
   "compilerOptions": {
+    "sourceMap": true,
     "outDir": "dist"
   },
   "ts-node": {
