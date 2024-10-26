@@ -11,14 +11,15 @@ import { z } from 'zod'
 import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
 import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-})
-
 export const login = new Hono().post(
   '/',
-  zValidator('json', loginSchema),
+  zValidator(
+    'json',
+    z.object({
+      email: z.string().email(),
+      password: z.string().min(8),
+    }),
+  ),
   async (c) => {
     const body = c.req.valid('json')
 

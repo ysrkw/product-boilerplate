@@ -12,14 +12,15 @@ import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
 import { sequelize } from '../database.mjs'
 import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
-const registerSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
-})
-
 export const register = new Hono().post(
   '/',
-  zValidator('json', registerSchema),
+  zValidator(
+    'json',
+    z.object({
+      email: z.string().email(),
+      password: z.string().min(8),
+    }),
+  ),
   async (c) => {
     const body = c.req.valid('json')
 
