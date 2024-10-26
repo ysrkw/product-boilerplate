@@ -1,10 +1,10 @@
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 
-import { login } from './login'
-import { register } from './register'
-import { sessions } from './sessions'
-import { users } from './users'
+import { login } from './login.mjs'
+import { register } from './register.mjs'
+import { sessions } from './sessions.mjs'
+import { users } from './users.mjs'
 
 export const routes = new Hono()
 

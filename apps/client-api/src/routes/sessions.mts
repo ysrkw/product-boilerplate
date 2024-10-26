@@ -3,8 +3,8 @@ import { Hono } from 'hono'
 import { setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant'
-import { createExpiredAt } from '../utils/create-expired-at'
+import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
+import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
 export const sessions = new Hono()
   .get('/:id', async (c) => {

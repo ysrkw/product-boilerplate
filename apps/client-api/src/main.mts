@@ -1,7 +1,7 @@
 import { serve } from '@hono/node-server'
 
-import { app } from './app'
-import { sequelize } from './database'
+import { app } from './app.mjs'
+import { sequelize } from './database.mjs'
 
 sequelize.sync({ force: true })
 

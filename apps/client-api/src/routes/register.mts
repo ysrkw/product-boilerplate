@@ -8,9 +8,9 @@ import { HTTPException } from 'hono/http-exception'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant'
-import { sequelize } from '../database'
-import { createExpiredAt } from '../utils/create-expired-at'
+import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
+import { sequelize } from '../database.mjs'
+import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
 const registerSchema = z.object({
   email: z.string().email(),

@@ -8,8 +8,8 @@ import { HTTPException } from 'hono/http-exception'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant'
-import { createExpiredAt } from '../utils/create-expired-at'
+import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
+import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
 const loginSchema = z.object({
   email: z.string().email(),

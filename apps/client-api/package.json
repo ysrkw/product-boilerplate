@@ -1,7 +1,7 @@
 {
   "name": "client-api",
   "scripts": {
-    "dev": "nodemon src/main.ts",
+    "dev": "node --loader ts-node/esm --watch src/main.mts",
     "build": "tsc",
     "lint": "eslint . --fix",
     "tsc": "tsc --noEmit"
