@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
 
@@ -10,3 +11,9 @@ app.use(secureHeaders())
 app.use(logger())
 
 app.route('/', routes)
+
+app.onError((error) => {
+  if (error instanceof HTTPException) return error.getResponse()
+  if (error instanceof Error) console.error(error)
+  throw new HTTPException(500)
+})

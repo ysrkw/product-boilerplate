@@ -8,13 +8,15 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.13.2",
+    "@hono/zod-validator": "^0.4.1",
     "@repo/sequelize": "*",
     "argon2": "^0.41.1",
     "cls-hooked": "^4.2.2",
     "hono": "^4.6.4",
     "sequelize": "^6.37.4",
     "sqlite3": "^5.1.7",
-    "ulid": "^2.3.0"
+    "ulid": "^2.3.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

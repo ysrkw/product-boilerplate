@@ -1,10 +1,9 @@
-import { getConnInfo } from '@hono/node-server/conninfo'
-import { Session, User } from '@repo/sequelize'
-import { verify } from 'argon2'
+import { Session } from '@repo/sequelize'
 import { Hono } from 'hono'
+import { setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
-import { ulid } from 'ulid'
 
+import { SESSION_NAME, SESSION_SECRET } from '../constant'
 import { createExpiredAt } from '../utils/create-expired-at'
 
 export const sessions = new Hono()
@@ -13,29 +12,27 @@ export const sessions = new Hono()
 
     const session = await Session.findByPk(parameter.id)
 
-    if (session === null) throw new HTTPException(400)
+    if (session === null) throw new HTTPException(401)
 
     return c.json({ session })
   })
-  .post('/', async (c) => {
-    const body = await c.req.json<{ email: string; password: string }>()
+  .put('/:id', async (c) => {
+    const parameter = c.req.param()
 
-    const user = await User.findOne({ where: { email: body.email } })
+    const session = await Session.findByPk(parameter.id)
 
-    if (user === null) throw new HTTPException(400)
+    if (session === null) throw new HTTPException(401)
 
-    const verifiedPassword = await verify(user.passwordHash, body.password)
+    session.expiredAt = createExpiredAt()
 
-    if (!verifiedPassword) throw new HTTPException(400)
+    await session.save()
 
-    const info = getConnInfo(c)
-
-    const session = await Session.create({
-      expiredAt: createExpiredAt(),
-      id: ulid(),
-      ipAddress: info.remote.address ?? '',
-      userId: user.id,
+    await setSignedCookie(c, SESSION_NAME, session.id, SESSION_SECRET, {
+      expires: session.expiredAt,
+      httpOnly: true,
+      sameSite: 'Strict',
+      secure: true,
     })
 
-    return c.json({ session, user })
+    return c.json({ session })
   })
