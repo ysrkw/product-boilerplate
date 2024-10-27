@@ -12,7 +12,7 @@ import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
 import { sequelize } from '../database.mjs'
 import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
-export const register = new Hono().post(
+export const signup = new Hono().post(
   '/',
   zValidator(
     'json',
