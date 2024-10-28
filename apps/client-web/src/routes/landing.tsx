@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-export function Landing() {
+export default function Landing() {
   return (
     <>
       <h1>Landing</h1>
