@@ -1,7 +1,7 @@
 import { getConnInfo } from '@hono/node-server/conninfo'
 import { zValidator } from '@hono/zod-validator'
 import { Password, Session, User } from '@repo/sequelize'
-import { hash } from 'argon2'
+import argon2 from 'argon2'
 import { Hono } from 'hono'
 import { setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -30,7 +30,7 @@ export const signup = new Hono().post(
 
     if (count > 0) throw new HTTPException(401)
 
-    const passwordHash = await hash(body.password)
+    const hash = await argon2.hash(body.password)
 
     const info = getConnInfo(c)
 
@@ -41,7 +41,7 @@ export const signup = new Hono().post(
       })
 
       await Password.create({
-        hash: passwordHash,
+        hash,
         id: ulid(),
         userId: user.id,
       })
