@@ -1,8 +1,18 @@
 import { ActionFunctionArgs, Form, redirect } from 'react-router-dom'
 
-export function Signup() {
+import { api } from '../utils/api'
+
+export async function action({ request }: ActionFunctionArgs) {
+  const form = await request.formData()
+
+  await api.post('signup', { body: form }).json()
+
+  return redirect('/dashboard')
+}
+
+export default function Signup() {
   return (
-    <Form action="/api/signup" method="POST">
+    <Form id="signup" method="POST">
       <div>
         <label htmlFor="email">メールアドレス</label>
         <input id="email" name="email" required type="email" />
@@ -19,19 +29,19 @@ export function Signup() {
         />
       </div>
       <div>
-        <label htmlFor="terms-of-service">利用規約の同意</label>
+        <label htmlFor="termsOfService">利用規約の同意</label>
         <input
-          id="terms-of-service"
-          name="terms-of-service"
+          id="termsOfService"
+          name="termsOfService"
           required
           type="checkbox"
         />
       </div>
       <div>
-        <label htmlFor="privacy-policy">プライバシーポリシーの同意</label>
+        <label htmlFor="privacyPolicy">プライバシーポリシーの同意</label>
         <input
-          id="privacy-policy"
-          name="privacy-policy"
+          id="privacyPolicy"
+          name="privacyPolicy"
           required
           type="checkbox"
         />
@@ -39,12 +49,4 @@ export function Signup() {
       <button type="submit">アカウント作成</button>
     </Form>
   )
-}
-
-export async function actionSignup({ request }: ActionFunctionArgs) {
-  const formData = await request.formData()
-
-  console.log(formData)
-
-  return redirect('/dashboard')
 }

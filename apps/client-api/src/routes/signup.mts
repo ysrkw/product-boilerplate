@@ -15,14 +15,16 @@ import { createExpiredAt } from '../utils/create-expired-at.mjs'
 export const signup = new Hono().post(
   '/',
   zValidator(
-    'json',
+    'form',
     z.object({
       email: z.string().email(),
-      password: z.string().min(8),
+      password: z.string().min(8).max(80),
+      privacyPolicy: z.enum(['on']),
+      termsOfService: z.enum(['on']),
     }),
   ),
   async (c) => {
-    const body = c.req.valid('json')
+    const body = c.req.valid('form')
 
     const count = await User.count({ where: { email: body.email } })
 
