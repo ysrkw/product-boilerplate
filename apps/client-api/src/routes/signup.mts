@@ -1,6 +1,6 @@
 import { getConnInfo } from '@hono/node-server/conninfo'
 import { zValidator } from '@hono/zod-validator'
-import { Session, User } from '@repo/sequelize'
+import { Password, Session, User } from '@repo/sequelize'
 import { hash } from 'argon2'
 import { Hono } from 'hono'
 import { setSignedCookie } from 'hono/cookie'
@@ -38,7 +38,12 @@ export const signup = new Hono().post(
       const user = await User.create({
         email: body.email,
         id: ulid(),
-        passwordHash,
+      })
+
+      await Password.create({
+        hash: passwordHash,
+        id: ulid(),
+        userId: user.id,
       })
 
       const session = await Session.create({
@@ -58,6 +63,6 @@ export const signup = new Hono().post(
       secure: true,
     })
 
-    return c.json({ session, user })
+    return c.json({ user })
   },
 )

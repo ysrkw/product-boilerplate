@@ -8,6 +8,7 @@ import {
   Sequelize,
 } from 'sequelize'
 
+import { Password } from './password'
 import { PasswordRequest } from './password-request'
 import { Session } from './session'
 
@@ -17,13 +18,14 @@ export class User extends Model<
 > {
   declare static associations: {
     passwordRequests: Association<User, PasswordRequest>
+    passwords: Association<User, Password>
     sessions: Association<User, Session>
   }
 
   declare email: string
   declare id: string
-  declare passwordHash: string
   declare passwordRequests?: NonAttribute<PasswordRequest[]>
+  declare passwords: NonAttribute<Password[]>
   declare sessions?: NonAttribute<Session[]>
 
   static initialize(sequelize: Sequelize): void {
@@ -39,10 +41,6 @@ export class User extends Model<
           primaryKey: true,
           type: DataTypes.STRING(),
         },
-        passwordHash: {
-          allowNull: false,
-          type: DataTypes.STRING(),
-        },
       },
       {
         sequelize,
@@ -52,6 +50,7 @@ export class User extends Model<
   }
 
   static relationship(): void {
+    this.hasMany(Password)
     this.hasMany(PasswordRequest)
     this.hasMany(Session)
   }
