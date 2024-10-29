@@ -1,10 +1,11 @@
 {
   "folders": [
-    { "name": "product", "path": "." },
-    { "name": "admin-api", "path": "./apps/admin-api" },
-    { "name": "admin-web", "path": "./apps/admin-web" },
-    { "name": "client-api", "path": "./apps/client-api" },
-    { "name": "client-web", "path": "./apps/client-web" },
+    { "name": "@root", "path": "." },
+    { "name": "@apps/admin-api", "path": "./apps/admin-api" },
+    { "name": "@apps/admin-web", "path": "./apps/admin-web" },
+    { "name": "@apps/client-api", "path": "./apps/client-api" },
+    { "name": "@apps/client-web", "path": "./apps/client-web" },
+    { "name": "@apps/test-mail", "path": "./apps/test-mail" },
     { "name": "@repo/eslint-config", "path": "./packages/eslint-config" },
     { "name": "@repo/sequelize", "path": "./packages/sequelize" },
     { "name": "@repo/ui", "path": "./packages/ui" },
