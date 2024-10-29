@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, Form, redirect } from 'react-router-dom'
+import { ActionFunctionArgs, Form, Link, redirect } from 'react-router-dom'
 
 import { api } from '../utils/api'
 
@@ -36,7 +36,12 @@ export default function Login() {
           type="password"
         />
       </div>
-      <button type="submit">ログイン</button>
+      <div>
+        <button type="submit">ログイン</button>
+      </div>
+      <div>
+        <Link to="/password-request">パスワードを忘れた方はこちら</Link>
+      </div>
     </Form>
   )
 }

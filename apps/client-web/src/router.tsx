@@ -5,6 +5,7 @@ import * as Landing from './routes/landing'
 import * as Login from './routes/login'
 import * as Logout from './routes/logout'
 import * as NotFound from './routes/not-found'
+import * as PasswordRequest from './routes/password-request'
 import * as Signup from './routes/signup'
 
 export const router = createBrowserRouter([
@@ -28,6 +29,11 @@ export const router = createBrowserRouter([
     element: <Signup.default />,
     loader: Signup.loader,
     path: '/signup',
+  },
+  {
+    element: <PasswordRequest.default />,
+    loader: PasswordRequest.loader,
+    path: '/password-request',
   },
   {
     element: <Dashboard.default />,

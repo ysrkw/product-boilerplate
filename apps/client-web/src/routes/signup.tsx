@@ -54,7 +54,9 @@ export default function Signup() {
           type="checkbox"
         />
       </div>
-      <button type="submit">アカウントの作成</button>
+      <div>
+        <button type="submit">アカウントの作成</button>
+      </div>
     </Form>
   )
 }
