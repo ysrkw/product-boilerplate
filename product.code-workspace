@@ -1,6 +1,8 @@
 {
   "folders": [
     { "name": "product", "path": "." },
+    { "name": "admin-api", "path": "./apps/admin-api" },
+    { "name": "admin-web", "path": "./apps/admin-web" },
     { "name": "client-api", "path": "./apps/client-api" },
     { "name": "client-web", "path": "./apps/client-web" },
     { "name": "@repo/eslint-config", "path": "./packages/eslint-config" },
