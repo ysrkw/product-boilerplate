@@ -1,25 +1,38 @@
 import { Session } from '@repo/sequelize'
 import { Hono } from 'hono'
-import { setSignedCookie } from 'hono/cookie'
+import { getSignedCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
+import { Op } from 'sequelize'
 
 import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
 import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
 export const sessions = new Hono()
-  .get('/:id', async (c) => {
-    const parameter = c.req.param()
+  .get('/', async (c) => {
+    const cookie = await getSignedCookie(c, SESSION_SECRET, SESSION_NAME)
 
-    const session = await Session.findByPk(parameter.id)
+    if (!cookie) return c.json({ ok: false })
 
-    if (session === null) throw new HTTPException(401)
+    const count = await Session.count({
+      where: {
+        expiredAt: { [Op.gt]: new Date() },
+        id: cookie,
+      },
+    })
 
-    return c.json({ session })
+    return c.json({ ok: count > 0 })
   })
-  .put('/:id', async (c) => {
-    const parameter = c.req.param()
+  .put('/', async (c) => {
+    const cookie = await getSignedCookie(c, SESSION_SECRET, SESSION_NAME)
 
-    const session = await Session.findByPk(parameter.id)
+    if (!cookie) throw new HTTPException(401)
+
+    const session = await Session.findOne({
+      where: {
+        expiredAt: { [Op.gt]: new Date() },
+        id: cookie,
+      },
+    })
 
     if (session === null) throw new HTTPException(401)
 

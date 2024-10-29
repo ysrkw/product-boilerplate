@@ -10,6 +10,14 @@ export async function action({ request }: ActionFunctionArgs) {
   return redirect('/dashboard')
 }
 
+export async function loader() {
+  const sessions = await api.get('sessions').json<{ ok: boolean }>()
+
+  if (sessions.ok) throw redirect('/dashboard')
+
+  return {}
+}
+
 export default function Login() {
   return (
     <Form id="login" method="POST">
