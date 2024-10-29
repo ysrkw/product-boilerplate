@@ -1,5 +1,4 @@
 import { Hono } from 'hono'
-import { HTTPException } from 'hono/http-exception'
 
 import { login } from './routes/login.mjs'
 import { logout } from './routes/logout.mjs'
