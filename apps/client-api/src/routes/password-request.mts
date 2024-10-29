@@ -4,8 +4,6 @@ import { Hono } from 'hono'
 import nodemailer from 'nodemailer'
 import z from 'zod'
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-
 export const passwordRequest = new Hono().post(
   '/',
   zValidator(
