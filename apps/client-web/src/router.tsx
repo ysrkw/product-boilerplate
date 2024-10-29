@@ -31,6 +31,7 @@ export const router = createBrowserRouter([
     path: '/signup',
   },
   {
+    action: PasswordRequest.action,
     element: <PasswordRequest.default />,
     loader: PasswordRequest.loader,
     path: '/password-request',

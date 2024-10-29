@@ -1,6 +1,20 @@
-import { Form, Link, redirect } from 'react-router-dom'
+import {
+  ActionFunctionArgs,
+  Form,
+  Link,
+  redirect,
+  useActionData,
+} from 'react-router-dom'
 
 import { api } from '../utils/api'
+
+export async function action({ request }: ActionFunctionArgs) {
+  const form = await request.formData()
+
+  return await api
+    .post('password-request', { body: form })
+    .json<{ ok: boolean }>()
+}
 
 export async function loader() {
   const sessions = await api.get('sessions').json<{ ok: boolean }>()
@@ -11,6 +25,7 @@ export async function loader() {
 }
 
 export default function PasswordRequest() {
+  const response = useActionData() as Awaited<ReturnType<typeof action>>
   return (
     <Form id="passwordRequest" method="POST">
       <div>
@@ -20,6 +35,7 @@ export default function PasswordRequest() {
       <div>
         <button type="submit">パスワード変更を送信</button>
       </div>
+      {response?.ok ? <div>送信が完了しました。</div> : <></>}
       <div>
         <Link to="/login">ログイン画面に戻る</Link>
       </div>
