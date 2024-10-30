@@ -11,12 +11,12 @@ import {
 
 import { User } from './user'
 
-export class PasswordRequest extends Model<
-  InferAttributes<PasswordRequest>,
-  InferCreationAttributes<PasswordRequest>
+export class PasswordReset extends Model<
+  InferAttributes<PasswordReset>,
+  InferCreationAttributes<PasswordReset>
 > {
   declare static associations: {
-    user: Association<PasswordRequest, User>
+    user: Association<PasswordReset, User>
   }
 
   declare expiredAt: Date

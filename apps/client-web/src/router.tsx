@@ -6,6 +6,7 @@ import * as Login from './routes/login'
 import * as Logout from './routes/logout'
 import * as NotFound from './routes/not-found'
 import * as PasswordRequest from './routes/password-request'
+import * as PasswordReset from './routes/password-reset'
 import * as Signup from './routes/signup'
 
 export const router = createBrowserRouter([
@@ -34,7 +35,13 @@ export const router = createBrowserRouter([
     action: PasswordRequest.action,
     element: <PasswordRequest.default />,
     loader: PasswordRequest.loader,
-    path: '/password-request',
+    path: '/passwords/requests',
+  },
+  {
+    action: PasswordReset.action,
+    element: <PasswordReset.default />,
+    loader: PasswordReset.loader,
+    path: '/passwords/resets/:resetId',
   },
   {
     element: <Dashboard.default />,

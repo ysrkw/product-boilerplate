@@ -8,8 +8,9 @@ import { HTTPException } from 'hono/http-exception'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
-import { sequelize } from '../database.mjs'
+import { MAIL_NO_REPLY, SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
+import { transporter } from '../libs/nodemailer.mjs'
+import { sequelize } from '../libs/sequelize.mjs'
 import { createExpiredAt } from '../utils/create-expired-at.mjs'
 
 export const signup = new Hono().post(
@@ -54,6 +55,12 @@ export const signup = new Hono().post(
       })
 
       return { session, user }
+    })
+
+    await transporter.sendMail({
+      from: MAIL_NO_REPLY,
+      text: 'Hello World',
+      to: user.email,
     })
 
     await setSignedCookie(c, SESSION_NAME, session.id, SESSION_SECRET, {

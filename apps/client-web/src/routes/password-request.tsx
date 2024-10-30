@@ -12,7 +12,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData()
 
   return await api
-    .post('password-request', { body: form })
+    .post('passwords/requests', { body: form })
     .json<{ ok: boolean }>()
 }
 

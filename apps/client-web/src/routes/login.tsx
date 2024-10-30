@@ -40,7 +40,7 @@ export default function Login() {
         <button type="submit">ログイン</button>
       </div>
       <div>
-        <Link to="/password-request">パスワードを忘れた方はこちら</Link>
+        <Link to="/passwords/requests">パスワードを忘れた方はこちら</Link>
       </div>
     </Form>
   )
