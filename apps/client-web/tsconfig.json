@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/vite-react",
   "compilerOptions": {
+    "types": ["vitest/globals"],
     "sourceMap": true
   }
 }
