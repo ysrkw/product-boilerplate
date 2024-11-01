@@ -1,7 +1,7 @@
 {
   "name": "@apps/client-web",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest run",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --fix",
