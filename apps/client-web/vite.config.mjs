@@ -1,12 +1,11 @@
 // @ts-check
 
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   clearScreen: false,
-  plugins: [react(), vanillaExtractPlugin()],
+  plugins: [react()],
   server: {
     open: true,
     port: 3000,
@@ -17,8 +16,9 @@ export default defineConfig({
     },
   },
   test: {
+    css: true,
     environment: 'happy-dom',
     globals: true,
-    setupFiles: './tests/setup.ts',
+    setupFiles: './src/setup-tests.ts',
   },
 })
