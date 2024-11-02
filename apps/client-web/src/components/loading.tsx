@@ -1,5 +1,5 @@
-import style from './loader.module.css'
+import { container } from './loader.css'
 
 export function Loader() {
-  return <div className={style.loader} />
+  return <div className={container} />
 }
