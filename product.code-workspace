@@ -8,7 +8,6 @@
     { "name": "@apps/test-mail", "path": "./apps/test-mail" },
     { "name": "@repo/eslint-config", "path": "./packages/eslint-config" },
     { "name": "@repo/sequelize", "path": "./packages/sequelize" },
-    { "name": "@repo/ui", "path": "./packages/ui" },
   ],
   "settings": {
     "files.exclude": {

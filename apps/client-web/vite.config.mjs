@@ -5,6 +5,11 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   clearScreen: false,
+  css: {
+    modules: {
+      localsConvention: 'dashes',
+    },
+  },
   plugins: [react()],
   server: {
     open: true,
