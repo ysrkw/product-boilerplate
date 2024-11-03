@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { RootLayout } from './components/root-layout'
+import { RootScreen } from './layouts/root-screen'
 import * as Dashboard from './routes/dashboard'
 import * as Landing from './routes/landing'
 import * as Login from './routes/login'
@@ -56,7 +56,7 @@ export const router = createBrowserRouter([
         path: '*',
       },
     ],
-    element: <RootLayout />,
+    element: <RootScreen />,
     path: '/',
   },
 ])

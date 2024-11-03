@@ -1,8 +1,8 @@
 import { RouterProvider } from 'react-router-dom'
 
-import { Loader } from './components/loading'
+import { SplashScreen } from './layouts/splash-screen'
 import { router } from './router'
 
 export function App() {
-  return <RouterProvider fallbackElement={<Loader />} router={router} />
+  return <RouterProvider fallbackElement={<SplashScreen />} router={router} />
 }
