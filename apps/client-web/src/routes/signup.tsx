@@ -1,17 +1,24 @@
-import { ActionFunctionArgs, Form, redirect } from 'react-router-dom'
+import {
+  ActionFunctionArgs,
+  Form,
+  LoaderFunctionArgs,
+  redirect,
+} from 'react-router-dom'
 
 import { api } from '../utils/api'
 
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData()
 
-  await api.post('signup', { body: form }).json()
+  await api.post('signup', { body: form, signal: request.signal }).json()
 
   return redirect('/dashboard')
 }
 
-export async function loader() {
-  const sessions = await api.get('sessions').json<{ ok: boolean }>()
+export async function loader({ request }: LoaderFunctionArgs) {
+  const sessions = await api
+    .get('sessions', { signal: request.signal })
+    .json<{ ok: boolean }>()
 
   if (sessions.ok) throw redirect('/dashboard')
 

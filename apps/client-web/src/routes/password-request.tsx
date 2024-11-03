@@ -2,6 +2,7 @@ import {
   ActionFunctionArgs,
   Form,
   Link,
+  LoaderFunctionArgs,
   redirect,
   useActionData,
 } from 'react-router-dom'
@@ -12,12 +13,14 @@ export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData()
 
   return await api
-    .post('passwords/requests', { body: form })
+    .post('passwords/requests', { body: form, signal: request.signal })
     .json<{ ok: boolean }>()
 }
 
-export async function loader() {
-  const sessions = await api.get('sessions').json<{ ok: boolean }>()
+export async function loader({ request }: LoaderFunctionArgs) {
+  const sessions = await api
+    .get('sessions', { signal: request.signal })
+    .json<{ ok: boolean }>()
 
   if (sessions.ok) throw redirect('/dashboard')
 

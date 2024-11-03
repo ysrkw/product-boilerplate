@@ -1,9 +1,11 @@
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, LoaderFunctionArgs, useLoaderData } from 'react-router-dom'
 
 import { api } from '../utils/api'
 
-export async function loader() {
-  const sessions = await api.get('sessions').json<{ ok: boolean }>()
+export async function loader({ request }: LoaderFunctionArgs) {
+  const sessions = await api
+    .get('sessions', { signal: request.signal })
+    .json<{ ok: boolean }>()
 
   return { sessions }
 }

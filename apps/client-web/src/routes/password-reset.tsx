@@ -10,18 +10,25 @@ import { api } from '../utils/api'
 export async function action({ params, request }: ActionFunctionArgs) {
   const form = await request.formData()
 
-  await api.post(`passwords/resets/${params.resetId}`, { body: form }).json()
+  await api
+    .post(`passwords/resets/${params.resetId}`, {
+      body: form,
+      signal: request.signal,
+    })
+    .json()
 
   return redirect('/login')
 }
 
-export async function loader({ params }: LoaderFunctionArgs) {
-  const sessions = await api.get('sessions').json<{ ok: boolean }>()
+export async function loader({ params, request }: LoaderFunctionArgs) {
+  const sessions = await api
+    .get('sessions', { signal: request.signal })
+    .json<{ ok: boolean }>()
 
   if (sessions.ok) throw redirect('/dashboard')
 
   const passwordsReset = await api
-    .get(`passwords/resets/${params.resetId}`)
+    .get(`passwords/resets/${params.resetId}`, { signal: request.signal })
     .json<{ ok: boolean }>()
 
   if (!passwordsReset.ok) throw redirect('/')
