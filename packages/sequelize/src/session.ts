@@ -48,6 +48,7 @@ export class Session extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
+        modelName: 'session',
         sequelize,
         underscored: true,
       },

@@ -21,6 +21,7 @@ export class Password extends Model<
 
   declare hash: string
   declare id: string
+  declare registeredAt: Date
   declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
@@ -36,6 +37,10 @@ export class Password extends Model<
           primaryKey: true,
           type: DataTypes.STRING(),
         },
+        registeredAt: {
+          allowNull: false,
+          type: DataTypes.DATE(),
+        },
         userId: {
           allowNull: false,
           type: DataTypes.STRING(),
@@ -43,6 +48,7 @@ export class Password extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
+        modelName: 'password',
         sequelize,
         underscored: true,
       },

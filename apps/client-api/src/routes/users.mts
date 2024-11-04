@@ -1,4 +1,4 @@
-import { Session, User } from '@repo/sequelize'
+import { Password, Session, User } from '@repo/sequelize'
 import { Hono } from 'hono'
 import { getSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -14,9 +14,18 @@ export const users = new Hono().get('/me', async (c) => {
 
   if (session === null) throw new HTTPException(401)
 
-  const user = await User.findByPk(session.userId)
+  const user = await User.findByPk(session.userId, {
+    include: [User.associations.sessions],
+  })
 
   if (user === null) throw new HTTPException(401)
 
-  return c.json({ user })
+  const password = await Password.findOne({
+    order: [['id', 'DESC']],
+    where: { userId: user.id },
+  })
+
+  if (password === null) throw new HTTPException(401)
+
+  return c.json({ registeredAt: password.registeredAt, user })
 })

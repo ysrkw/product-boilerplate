@@ -42,6 +42,7 @@ export const passwordResets = new Hono()
         await Password.create({
           hash,
           id: ulid(),
+          registeredAt: new Date(),
           userId: passwordReset.userId,
         })
 

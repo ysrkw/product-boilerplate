@@ -43,6 +43,7 @@ export class PasswordReset extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
+        modelName: 'passwordReset',
         sequelize,
         underscored: true,
       },

@@ -44,6 +44,7 @@ export const signup = new Hono().post(
       await Password.create({
         hash,
         id: ulid(),
+        registeredAt: new Date(),
         userId: user.id,
       })
 

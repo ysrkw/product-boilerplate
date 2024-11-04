@@ -43,6 +43,7 @@ export class User extends Model<
         },
       },
       {
+        modelName: 'user',
         sequelize,
         underscored: true,
       },
