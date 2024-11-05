@@ -1,5 +1,5 @@
 import { zValidator } from '@hono/zod-validator'
-import { PasswordReset, User } from '@repo/sequelize'
+import { User, UserPasswordReset } from '@repo/sequelize'
 import { Hono } from 'hono'
 import { ulid } from 'ulid'
 import z from 'zod'
@@ -23,7 +23,7 @@ export const passwordRequests = new Hono().post(
 
     if (user === null) return c.json({ ok: true })
 
-    const passwordReset = await PasswordReset.create({
+    const passwordReset = await UserPasswordReset.create({
       expiredAt: createExpiredAt(),
       id: ulid(),
       userId: user.id,

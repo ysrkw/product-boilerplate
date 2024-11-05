@@ -8,25 +8,28 @@ import {
   Sequelize,
 } from 'sequelize'
 
-import { Password } from './password'
-import { PasswordReset } from './password-reset'
-import { Session } from './session'
+import { UserOneTimePassword } from './user-one-time-password'
+import { UserPassword } from './user-password'
+import { UserPasswordReset } from './user-password-reset'
+import { UserSession } from './user-session'
 
 export class User extends Model<
   InferAttributes<User>,
   InferCreationAttributes<User>
 > {
   declare static associations: {
-    passwordResets: Association<User, PasswordReset>
-    passwords: Association<User, Password>
-    sessions: Association<User, Session>
+    userOneTimePassword: Association<User, UserOneTimePassword>
+    userPasswordResets: Association<User, UserPasswordReset>
+    userPasswords: Association<User, UserPassword>
+    userSessions: Association<User, UserSession>
   }
 
   declare email: string
   declare id: string
-  declare passwordResets?: NonAttribute<PasswordReset[]>
-  declare passwords?: NonAttribute<Password[]>
-  declare sessions?: NonAttribute<Session[]>
+  declare userOneTimePasswords?: NonAttribute<UserOneTimePassword[]>
+  declare userPasswordResets?: NonAttribute<UserPasswordReset[]>
+  declare userPasswords?: NonAttribute<UserPassword[]>
+  declare userSessions?: NonAttribute<UserSession[]>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
@@ -51,8 +54,9 @@ export class User extends Model<
   }
 
   static relationship(): void {
-    this.hasMany(Password)
-    this.hasMany(PasswordReset)
-    this.hasMany(Session)
+    this.hasMany(UserOneTimePassword)
+    this.hasMany(UserPassword)
+    this.hasMany(UserPasswordReset)
+    this.hasMany(UserSession)
   }
 }

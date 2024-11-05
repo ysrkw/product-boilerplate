@@ -1,4 +1,4 @@
-import { Session } from '@repo/sequelize'
+import { UserSession } from '@repo/sequelize'
 import { Hono } from 'hono'
 import { getSignedCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
@@ -13,7 +13,7 @@ export const sessions = new Hono()
 
     if (!cookie) return c.json({ ok: false })
 
-    const count = await Session.count({
+    const count = await UserSession.count({
       where: {
         expiredAt: { [Op.gt]: new Date() },
         id: cookie,
@@ -27,7 +27,7 @@ export const sessions = new Hono()
 
     if (!cookie) throw new HTTPException(401)
 
-    const session = await Session.findOne({
+    const session = await UserSession.findOne({
       where: {
         expiredAt: { [Op.gt]: new Date() },
         id: cookie,

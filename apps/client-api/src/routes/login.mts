@@ -1,6 +1,6 @@
 import { getConnInfo } from '@hono/node-server/conninfo'
 import { zValidator } from '@hono/zod-validator'
-import { Password, Session, User } from '@repo/sequelize'
+import { User, UserPassword, UserSession } from '@repo/sequelize'
 import argon2 from 'argon2'
 import { Hono } from 'hono'
 import { setSignedCookie } from 'hono/cookie'
@@ -27,7 +27,7 @@ export const login = new Hono().post(
 
     if (user === null) throw new HTTPException(401)
 
-    const password = await Password.findOne({
+    const password = await UserPassword.findOne({
       order: [['id', 'DESC']],
       where: { userId: user.id },
     })
@@ -40,7 +40,7 @@ export const login = new Hono().post(
 
     const info = getConnInfo(c)
 
-    const session = await Session.create({
+    const session = await UserSession.create({
       expiredAt: createExpiredAt(),
       id: ulid(),
       ipAddress: info.remote.address ?? '',

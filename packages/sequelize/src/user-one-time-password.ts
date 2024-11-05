@@ -11,34 +11,24 @@ import {
 
 import { User } from './user'
 
-export class Session extends Model<
-  InferAttributes<Session>,
-  InferCreationAttributes<Session>
+export class UserOneTimePassword extends Model<
+  InferAttributes<UserOneTimePassword>,
+  InferCreationAttributes<UserOneTimePassword>
 > {
   declare static associations: {
-    user: Association<Session, User>
+    user: Association<UserOneTimePassword, User>
   }
 
-  declare expiredAt: Date
-  declare id: string
-  declare ipAddress: string
+  declare token: string
   declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
   static initialize(sequelize: Sequelize): void {
     this.init(
       {
-        expiredAt: {
-          allowNull: false,
-          type: DataTypes.DATE(),
-        },
-        id: {
+        token: {
           allowNull: false,
           primaryKey: true,
-          type: DataTypes.STRING(),
-        },
-        ipAddress: {
-          allowNull: false,
           type: DataTypes.STRING(),
         },
         userId: {
@@ -48,7 +38,7 @@ export class Session extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
-        modelName: 'session',
+        modelName: 'userOneTimePassword',
         sequelize,
         underscored: true,
       },

@@ -11,16 +11,17 @@ import {
 
 import { User } from './user'
 
-export class PasswordReset extends Model<
-  InferAttributes<PasswordReset>,
-  InferCreationAttributes<PasswordReset>
+export class UserSession extends Model<
+  InferAttributes<UserSession>,
+  InferCreationAttributes<UserSession>
 > {
   declare static associations: {
-    user: Association<PasswordReset, User>
+    user: Association<UserSession, User>
   }
 
   declare expiredAt: Date
   declare id: string
+  declare ipAddress: string
   declare user?: NonAttribute<User>
   declare userId: ForeignKey<User['id']>
 
@@ -36,6 +37,10 @@ export class PasswordReset extends Model<
           primaryKey: true,
           type: DataTypes.STRING(),
         },
+        ipAddress: {
+          allowNull: false,
+          type: DataTypes.STRING(),
+        },
         userId: {
           allowNull: false,
           type: DataTypes.STRING(),
@@ -43,7 +48,7 @@ export class PasswordReset extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
-        modelName: 'passwordReset',
+        modelName: 'userSession',
         sequelize,
         underscored: true,
       },

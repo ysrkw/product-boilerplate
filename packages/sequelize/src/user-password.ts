@@ -11,12 +11,12 @@ import {
 
 import { User } from './user'
 
-export class Password extends Model<
-  InferAttributes<Password>,
-  InferCreationAttributes<Password>
+export class UserPassword extends Model<
+  InferAttributes<UserPassword>,
+  InferCreationAttributes<UserPassword>
 > {
   declare static associations: {
-    user: Association<Password, User>
+    user: Association<UserPassword, User>
   }
 
   declare hash: string
@@ -48,7 +48,7 @@ export class Password extends Model<
       },
       {
         indexes: [{ fields: ['user_id'], unique: false }],
-        modelName: 'password',
+        modelName: 'userPassword',
         sequelize,
         underscored: true,
       },
