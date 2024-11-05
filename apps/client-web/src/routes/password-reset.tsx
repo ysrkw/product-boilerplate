@@ -10,14 +10,18 @@ import { api } from '../utils/api'
 export async function action({ params, request }: ActionFunctionArgs) {
   const form = await request.formData()
 
-  await api
+  const response = await api
     .post(`passwords/resets/${params.resetId}`, {
       body: form,
       signal: request.signal,
     })
-    .json()
+    .json<{ ok: boolean }>()
 
-  return redirect('/login')
+  if (response.ok) {
+    return redirect(`/passwords/resets/${params.resetId}/complete`)
+  }
+
+  return response
 }
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
@@ -40,7 +44,7 @@ export default function PasswordReset() {
   return (
     <Form id="passwordReset" method="POST">
       <div>
-        <label htmlFor="password">パスワード</label>
+        <label htmlFor="password">新しいパスワード</label>
         <input
           id="password"
           maxLength={80}
@@ -51,7 +55,18 @@ export default function PasswordReset() {
         />
       </div>
       <div>
-        <button type="submit">変更</button>
+        <label htmlFor="confirmPassword">新しいパスワード（確認用）</label>
+        <input
+          id="confirmPassword"
+          maxLength={80}
+          minLength={8}
+          name="confirmPassword"
+          required
+          type="password"
+        />
+      </div>
+      <div>
+        <button type="submit">パスワードの変更</button>
       </div>
     </Form>
   )

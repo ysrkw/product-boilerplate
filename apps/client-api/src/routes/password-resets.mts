@@ -24,9 +24,15 @@ export const passwordResets = new Hono()
     '/:resetId',
     zValidator(
       'form',
-      z.object({
-        password: z.string().min(8).max(80),
-      }),
+      z
+        .object({
+          confirmPassword: z.string().min(8).max(80),
+          password: z.string().min(8).max(80),
+        })
+        .refine((v) => v.confirmPassword === v.password, {
+          message: 'Passwords must match!',
+          path: ['confirmPassword'],
+        }),
     ),
     async (c) => {
       const parameter = c.req.param()

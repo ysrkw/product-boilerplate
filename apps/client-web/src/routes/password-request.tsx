@@ -4,7 +4,6 @@ import {
   Link,
   LoaderFunctionArgs,
   redirect,
-  useActionData,
 } from 'react-router-dom'
 
 import { api } from '../utils/api'
@@ -12,9 +11,15 @@ import { api } from '../utils/api'
 export async function action({ request }: ActionFunctionArgs) {
   const form = await request.formData()
 
-  return await api
+  const response = await api
     .post('passwords/requests', { body: form, signal: request.signal })
     .json<{ ok: boolean }>()
+
+  if (response.ok) {
+    return redirect('/passwords/requests/complete')
+  }
+
+  return response
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -28,7 +33,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function PasswordRequest() {
-  const response = useActionData() as Awaited<ReturnType<typeof action>>
   return (
     <Form id="passwordRequest" method="POST">
       <div>
@@ -36,9 +40,8 @@ export default function PasswordRequest() {
         <input id="email" name="email" required type="email" />
       </div>
       <div>
-        <button type="submit">パスワード変更を送信</button>
+        <button type="submit">パスワードの変更先URLを送信</button>
       </div>
-      {response?.ok ? <div>送信が完了しました。</div> : <></>}
       <div>
         <Link to="/login">ログイン画面に戻る</Link>
       </div>

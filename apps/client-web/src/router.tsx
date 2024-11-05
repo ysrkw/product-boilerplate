@@ -7,7 +7,9 @@ import * as Login from './routes/login'
 import * as Logout from './routes/logout'
 import * as NotFound from './routes/not-found'
 import * as PasswordRequest from './routes/password-request'
+import * as PasswordRequestComplete from './routes/password-request-complete'
 import * as PasswordReset from './routes/password-reset'
+import * as PasswordResetComplete from './routes/password-reset-complete'
 import * as Signup from './routes/signup'
 
 export const router = createBrowserRouter([
@@ -41,10 +43,20 @@ export const router = createBrowserRouter([
         path: 'passwords/requests',
       },
       {
+        element: <PasswordRequestComplete.default />,
+        loader: PasswordRequestComplete.loader,
+        path: 'passwords/requests/complete',
+      },
+      {
         action: PasswordReset.action,
         element: <PasswordReset.default />,
         loader: PasswordReset.loader,
         path: 'passwords/resets/:resetId',
+      },
+      {
+        element: <PasswordResetComplete.default />,
+        loader: PasswordResetComplete.loader,
+        path: 'passwords/resets/:resetId/complete',
       },
       {
         element: <Dashboard.default />,
