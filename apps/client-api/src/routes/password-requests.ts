@@ -4,9 +4,9 @@ import { Hono } from 'hono'
 import { ulid } from 'ulid'
 import z from 'zod'
 
-import { MAIL_NO_REPLY } from '../constant.mjs'
-import { transporter } from '../libs/nodemailer.mjs'
-import { createExpiredAt } from '../utils/create-expired-at.mjs'
+import { MAIL_NO_REPLY } from '../constant'
+import { transporter } from '../libs/nodemailer'
+import { createExpiredAt } from '../utils/create-expired-at'
 
 export const passwordRequests = new Hono().post(
   '/',

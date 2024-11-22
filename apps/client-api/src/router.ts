@@ -1,12 +1,12 @@
 import { Hono } from 'hono'
 
-import { login } from './routes/login.mjs'
-import { logout } from './routes/logout.mjs'
-import { passwordRequests } from './routes/password-requests.mjs'
-import { passwordResets } from './routes/password-resets.mjs'
-import { sessions } from './routes/sessions.mjs'
-import { signup } from './routes/signup.mjs'
-import { users } from './routes/users.mjs'
+import { login } from './routes/login'
+import { logout } from './routes/logout'
+import { passwordRequests } from './routes/password-requests'
+import { passwordResets } from './routes/password-resets'
+import { sessions } from './routes/sessions'
+import { signup } from './routes/signup'
+import { users } from './routes/users'
 
 export const router = new Hono()
 

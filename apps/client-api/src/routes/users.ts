@@ -8,7 +8,7 @@ import { Hono } from 'hono'
 import { getSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
+import { SESSION_NAME, SESSION_SECRET } from '../constant'
 
 export const users = new Hono().get('/me', async (c) => {
   const cookie = await getSignedCookie(c, SESSION_SECRET, SESSION_NAME)

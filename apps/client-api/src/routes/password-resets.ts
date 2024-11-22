@@ -6,7 +6,7 @@ import { HTTPException } from 'hono/http-exception'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { sequelize } from '../libs/sequelize.mjs'
+import { sequelize } from '../libs/sequelize'
 
 export const passwordResets = new Hono()
   .get('/:resetId', async (c) => {

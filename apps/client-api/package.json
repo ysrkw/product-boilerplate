@@ -1,7 +1,7 @@
 {
   "name": "@apps/client-api",
   "scripts": {
-    "dev": "node --loader ts-node/esm --watch src/main.mts",
+    "dev": "nodemon src/main.ts",
     "build": "tsc",
     "lint": "eslint . --fix",
     "tsc": "tsc --noEmit"
@@ -22,7 +22,9 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@tsconfig/node22": "^22.0.0",
+    "@swc/cli": "^0.5.1",
+    "@swc/core": "^1.9.2",
+    "@tsconfig/recommended": "^1.0.8",
     "@types/cls-hooked": "^4.3.9",
     "@types/nodemailer": "^6.4.16",
     "eslint": "^9.0.0",

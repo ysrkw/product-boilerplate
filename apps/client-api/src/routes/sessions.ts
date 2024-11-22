@@ -4,8 +4,8 @@ import { getSignedCookie, setSignedCookie } from 'hono/cookie'
 import { HTTPException } from 'hono/http-exception'
 import { Op } from 'sequelize'
 
-import { SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
-import { createExpiredAt } from '../utils/create-expired-at.mjs'
+import { SESSION_NAME, SESSION_SECRET } from '../constant'
+import { createExpiredAt } from '../utils/create-expired-at'
 
 export const sessions = new Hono()
   .get('/', async (c) => {

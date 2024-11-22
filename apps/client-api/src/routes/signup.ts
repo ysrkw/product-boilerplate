@@ -8,10 +8,10 @@ import { HTTPException } from 'hono/http-exception'
 import { ulid } from 'ulid'
 import { z } from 'zod'
 
-import { MAIL_NO_REPLY, SESSION_NAME, SESSION_SECRET } from '../constant.mjs'
-import { transporter } from '../libs/nodemailer.mjs'
-import { sequelize } from '../libs/sequelize.mjs'
-import { createExpiredAt } from '../utils/create-expired-at.mjs'
+import { MAIL_NO_REPLY, SESSION_NAME, SESSION_SECRET } from '../constant'
+import { transporter } from '../libs/nodemailer'
+import { sequelize } from '../libs/sequelize'
+import { createExpiredAt } from '../utils/create-expired-at'
 
 export const signup = new Hono().post(
   '/',

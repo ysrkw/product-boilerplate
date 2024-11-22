@@ -3,7 +3,7 @@ import { HTTPException } from 'hono/http-exception'
 import { logger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
 
-import { router } from './router.mjs'
+import { router } from './router'
 
 export const app = new Hono()
 
