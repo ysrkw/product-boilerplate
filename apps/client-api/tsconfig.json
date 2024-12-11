@@ -5,9 +5,5 @@
     "moduleResolution": "bundler",
     "sourceMap": true,
     "outDir": "dist"
-  },
-  "ts-node": {
-    "transpileOnly": true,
-    "swc": true
   }
 }

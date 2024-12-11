@@ -7,12 +7,12 @@ const namespace = createNamespace('client-api')
 Sequelize.useCLS(namespace)
 
 export const sequelize = new Sequelize({
+  database: 'develop',
   dialect: 'mysql',
   host: '127.0.0.1',
-  port: 3306,
-  database: 'develop',
-  username: 'docker',
   password: 'docker',
+  port: 3306,
+  username: 'docker',
 })
 
 initialize(sequelize)
