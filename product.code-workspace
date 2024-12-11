@@ -5,7 +5,6 @@
     { "name": "@apps/admin-web", "path": "./apps/admin-web" },
     { "name": "@apps/client-api", "path": "./apps/client-api" },
     { "name": "@apps/client-web", "path": "./apps/client-web" },
-    { "name": "@apps/test-mail", "path": "./apps/test-mail" },
     { "name": "@repo/eslint-config", "path": "./packages/eslint-config" },
     { "name": "@repo/sequelize", "path": "./packages/sequelize" },
   ],

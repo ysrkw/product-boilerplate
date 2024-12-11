@@ -6,6 +6,13 @@ const namespace = createNamespace('client-api')
 
 Sequelize.useCLS(namespace)
 
-export const sequelize = new Sequelize('sqlite://dist/db.sqlite')
+export const sequelize = new Sequelize({
+  dialect: 'mysql',
+  host: '127.0.0.1',
+  port: 3306,
+  database: 'develop',
+  username: 'docker',
+  password: 'docker',
+})
 
 initialize(sequelize)

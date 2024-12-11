@@ -1,9 +1,0 @@
-{
-  "name": "@apps/test-mail",
-  "scripts": {
-    "dev": "maildev"
-  },
-  "devDependencies": {
-    "maildev": "^2.1.0"
-  }
-}
