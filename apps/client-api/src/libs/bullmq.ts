@@ -1,23 +1,24 @@
 import { Queue, Worker } from 'bullmq'
 
-export async function scheduler() {
-  const NAME = 'TEST'
+const url = 'redis://127.0.0.1:6379'
 
-  const queue = new Queue(NAME, {
-    connection: { url: 'redis://127.0.0.1:6379' },
+export async function scheduler() {
+  const queue = new Queue('app', { connection: { url } })
+
+  await queue.drain()
+
+  await queue.upsertJobScheduler('schedule', {
+    pattern: '* * * * *',
   })
 
-  await queue.add('test', {})
-
   const worker = new Worker(
-    NAME,
+    'app',
     async (jobs) => {
       console.log(jobs.id, jobs.name, jobs.data, new Date())
     },
-    {
-      connection: { url: 'redis://127.0.0.1:6379' },
-    },
+    { connection: { url } },
   )
 
+  worker.on('error', console.error)
   worker.on('failed', console.error)
 }
