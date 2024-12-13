@@ -1,9 +1,7 @@
 {
   "extends": "@tsconfig/recommended",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "sourceMap": true
   }
 }
